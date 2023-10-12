@@ -18,6 +18,8 @@ DHT dht(DHTPIN, DHTTYPE);
 #define MOISTUREPIN 34
 
 // konfigurasi rain gauge
+#define RAINPIN 32
+volatile unsigned long jumlah_tip = 0;
 
 // lora
 #define SS 5
@@ -33,9 +35,5 @@ const int BW = 125E3;
 #define RatioMQ2CleanAir (9.83) // RS / R0 = 9.83 ppm
 #define SENSOR_ANALOG_PIN 35   // D35
 MQ2 mq2(SENSOR_ANALOG_PIN);
-
-// konfigurasi dua led
-#define LED1 12
-#define LED2 27
 
 #endif

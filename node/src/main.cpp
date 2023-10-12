@@ -8,6 +8,10 @@ void setup() {
   // DHT
   dht.begin();
 
+  // rain gauge
+  pinMode(RAINPIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(RAINPIN), readTip, CHANGE);
+
   // LORA
   while (!Serial)
     ;
@@ -24,10 +28,6 @@ void setup() {
   LoRa.setCodingRate4(5);
   LoRa.enableCrc();
   Serial.println("LoRa Transmitter Ready!");
-
-  // LED
-  pinMode(LED1, OUTPUT);
-  pinMode(LED2, OUTPUT);
 
   // MQ2
   mq2.setRegressionMethod(1); //_PPM =  a*ratio^b
@@ -95,18 +95,10 @@ void loop() {
     float co;
     readMQ4(co);
 
-    //pemanggilan fungsi untuk membaca sensor rain gauge
-    float intensity;
-    readRainGuegeSensor(intensity);
-
     //pemanggilan fungsi untuk mengirim data melalui lora
-    sendDataLora(temp, humd, moisture,co, intensity);
+    sendDataLora(temp, humd, moisture,co, jumlah_tip);
 
+    jumlah_tip = 0;
   }
 
-  //menghidupkan led
-  digitalWrite(LED1, HIGH);
-  delay(500);
-  digitalWrite(LED1, LOW);
-  digitalWrite(LED2, LOW);
 }
