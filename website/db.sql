@@ -1,0 +1,17 @@
+CREATE DATABASE iot_SPDKH;
+
+use iot_SPDKH;
+
+DROP TABLE IF EXISTS SPDKH;
+
+CREATE TABLE hutan (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `temperature` FLOAT NOT NULL,
+  `humidity` FLOAT NOT NULL,
+  `moisture` FLOAT NOT NULL,
+  `co` FLOAT NOT NULL,
+  `count_tip` INT NOT NULL,
+  `rainfall` FLOAT NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
