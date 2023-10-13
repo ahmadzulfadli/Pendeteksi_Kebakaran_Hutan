@@ -78,6 +78,17 @@ void loop() {
         Serial.print("' with RSSI ");
         Serial.println(LoRa.packetRssi());
 
+        Serial.print("Temperature: ");
+        Serial.println(temp);
+        Serial.print("Humidity: ");
+        Serial.println(humd);
+        Serial.print("Moisture: ");
+        Serial.println(moist);
+        Serial.print("CO: ");
+        Serial.println(co);
+        Serial.print("Jumlah Tip: ");
+        Serial.println(jumlahTip);
+
         // kirim ke server
         // sendDataToServer(temp, humd, moist, co, jumlahTip);
     }
