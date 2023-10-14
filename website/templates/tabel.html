@@ -4,7 +4,7 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0">
-          <h6>Composter Data Table</h6>
+          <h6>SPDKH Data Table</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive p-0">
@@ -28,19 +28,27 @@
                   </th>
                   <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                    Humidity
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                     Moisture
                   </th>
                   <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                    pH-Meter
+                    CO Konsentration
                   </th>
                   <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Day
+                    Rainfall
                   </th>
                   <th
                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Time
+                    Status
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    Time and Date
                   </th>
                 </tr>
               </thead>
@@ -65,17 +73,27 @@
                   </td>
                   <td>
                     <p class="text-xs font-weight-bold mb-0">
+                      {{data.humidity}}%
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
                       {{data.moisture}}%
                     </p>
                   </td>
                   <td>
                     <p class="text-xs font-weight-bold mb-0">
-                      {{data.ph_meter}}ppm
+                      {{data.co}} ppm
                     </p>
                   </td>
                   <td>
                     <p class="text-xs font-weight-bold mb-0">
-                      {{data.count_day}}
+                      {{data.rainfall}} mm
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{data.status}}
                     </p>
                   </td>
                   <td>

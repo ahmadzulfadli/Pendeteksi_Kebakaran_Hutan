@@ -25,20 +25,21 @@ db = SQLAlchemy(app)
 # tabel komposter
 
 class Hutan(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True)
     temperature = db.Column(db.Float, nullable=False)
     humidity = db.Column(db.Float, nullable=False)
     moisture = db.Column(db.Float, nullable=False)
     co = db.Column(db.Float, nullable=False)
     count_tip = db.Column(db.Integer, nullable=False)
     rainfall = db.Column(db.Float, nullable=False)
-    timestamp = db.Column(db.TIMESTAMP, nullable=False,
-                          server_default=db.func.current_timestamp())
+    status = db.Column(db.String(100), nullable=False)
+    timestamp = db.Column(db.TIMESTAMP, nullable=False, server_default=db.func.current_timestamp())
 
-    def __init__(self, temperature, humidity, moisture, co, count_tip, rainfall):
+    def __init__(self, temperature, humidity, moisture, co, count_tip, rainfall, status):
         self.temperature = temperature
         self.humidity = humidity
         self.moisture = moisture
         self.co = co
         self.count_tip = count_tip
         self.rainfall = rainfall
+        self.status = status
