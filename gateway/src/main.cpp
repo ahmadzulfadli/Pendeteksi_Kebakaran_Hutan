@@ -40,57 +40,57 @@ void setup() {
 
 void loop() {
 
-    // penerimaan lora
-    String receivedData = "";
+  // // penerimaan lora
+  String receivedData = "";
 
-    int packetSize = LoRa.parsePacket();
-    if (packetSize != 0)
-    {
-        Serial.print("Received packet '");
+  int packetSize = LoRa.parsePacket();
+  if (packetSize != 0)
+  {
+      Serial.print("Received packet '");
 
-        while (LoRa.available())
-        {
-            receivedData += (char)LoRa.read();
-        }
+      while (LoRa.available())
+      {
+          receivedData += (char)LoRa.read();
+      }
 
-        Serial.println(receivedData);
+      Serial.println(receivedData);
 
-        char stringData[receivedData.length() + 1];
-        strcpy(stringData, receivedData.c_str());
+      char stringData[receivedData.length() + 1];
+      strcpy(stringData, receivedData.c_str());
 
-        char *ptr = strtok(stringData, ",");
-        int i = 0;
-        String data[6];
+      char *ptr = strtok(stringData, ",");
+      int i = 0;
+      String data[6];
 
-        while (ptr != NULL)
-        {
-            data[i] = String(ptr);
-            i++;
-            ptr = strtok(NULL, ",");
-        }
+      while (ptr != NULL)
+      {
+          data[i] = String(ptr);
+          i++;
+          ptr = strtok(NULL, ",");
+      }
 
-        String temp = data[0];
-        String humd = data[1];
-        String moist = data[2];
-        String co = data[3];
-        String jumlahTip = data[4];
+      String temp = data[0];
+      String humd = data[1];
+      String moist = data[2];
+      String co = data[3];
+      String jumlahTip = data[4];
 
-        Serial.print("' with RSSI ");
-        Serial.println(LoRa.packetRssi());
+      Serial.print("' with RSSI ");
+      Serial.println(LoRa.packetRssi());
 
-        Serial.print("Temperature: ");
-        Serial.println(temp);
-        Serial.print("Humidity: ");
-        Serial.println(humd);
-        Serial.print("Moisture: ");
-        Serial.println(moist);
-        Serial.print("CO: ");
-        Serial.println(co);
-        Serial.print("Jumlah Tip: ");
-        Serial.println(jumlahTip);
+      Serial.print("Temperature: ");
+      Serial.println(temp);
+      Serial.print("Humidity: ");
+      Serial.println(humd);
+      Serial.print("Moisture: ");
+      Serial.println(moist);
+      Serial.print("CO: ");
+      Serial.println(co);
+      Serial.print("Jumlah Tip: ");
+      Serial.println(jumlahTip);
 
-        // kirim ke server
-        // sendDataToServer(temp, humd, moist, co, jumlahTip);
-    }
-
+      // kirim ke server
+      sendDataToServer(temp, humd, moist, co, jumlahTip);
+  }
+  
 }

@@ -6,6 +6,7 @@
 #include <WiFi.h>
 #include <LoRa.h>
 #include <UrlEncode.h>
+#include <HTTPClient.h>
 // lora
 #define SS 5
 #define RST 14
@@ -17,10 +18,7 @@ const long BAUD_RATE = 9600; // kecepatan data LoRa
 const int BW = 125E3;
 
 // wifi
-const char *ssid = "Ahmad Zulfadli";
-const char *password = "sampoerna12";
-const char *host = "192.168.80.240";
-const int port = 80;
-
+const char *ssid = "ssid";
+const char *password = "pass";
 
 #endif

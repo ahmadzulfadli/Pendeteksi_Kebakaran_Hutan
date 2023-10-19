@@ -16,46 +16,36 @@
 
 // KIRIM DATA KE SERVER
 void sendDataToServer(String temp, String humd, String moist, String co, String jumlahTip){
-    WiFiClient client;
-    if (!client.connect(host, port))
-    {
-        Serial.println(">>> Connection failed !");
-        return;
-    }
 
+    
     // pengiriman nilai sensor ke web server
-    String apiUrl = "http://intai.com/crud/kirim_data.php?";
+    String apiUrl = "apiEndpoint";
     apiUrl += "mode=save";
-    apiUrl += "&temp=" + temp;
-    apiUrl += "&humd=" + humd;
-    apiUrl += "&moist=" + moist;
+    apiUrl += "&temperature=" + temp;
+    apiUrl += "&humidity=" + humd;
+    apiUrl += "&moisture=" + moist;
     apiUrl += "&co=" + co;
-    apiUrl += "&jumlah_tip=" + jumlahTip;
+    apiUrl += "&count_tip=" + jumlahTip;
 
-    // Set header Request
-    client.print(String("GET ") + apiUrl + " HTTP/1.1\r\n" +
-                 "Host: " + host + "\r\n" +
-                 "Connection: close\r\n\r\n");
+    // Make the HTTP GET request
+    HTTPClient http;
+    http.begin(apiUrl);
 
-    // Pastikan tidak berlarut-larut
-    unsigned long timeout = millis();
-    while (client.available() == 0)
+    // Send the GET request
+    int httpResponseCode = http.GET();
+
+    if (httpResponseCode > 0)
     {
-        if (millis() - timeout > 3000)
-        {
-            Serial.println(">>> Client Timeout !");
-            Serial.println(">>> Operation failed !");
-            client.stop();
-            return;
-        }
+        Serial.printf("HTTP Response code: %d\n", httpResponseCode);
+        String response = http.getString();
+        Serial.println(response);
+    }
+    else
+    {
+        Serial.printf("HTTP GET request failed, error: %s\n", http.errorToString(httpResponseCode).c_str());
     }
 
-    // Baca hasil balasan dari PHP
-    while (client.available())
-    {
-        String line = client.readStringUntil('\r');
-        Serial.println(line);
-    }
+    http.end();
 }
 
 #endif
