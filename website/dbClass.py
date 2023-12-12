@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.secret_key = "djfljdfljfnkjsfhjfshjkfjfjfhjdhfdjhdfu"
 
 # koneksi ke database
-userpass = "mysql+pymysql://fadli:Kucinghitam123@"
+userpass = "mysql+pymysql://user:Pass@"
 basedir = "127.0.0.1"
 dbname = "/iot_SPDKH"
 

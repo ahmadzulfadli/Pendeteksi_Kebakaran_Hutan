@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/pr001/Desktop/iot_dash/env"
+VIRTUAL_ENV="/home/pr001/Data/project_iot/Pendeteksi_Kebakaran_Hutan/website/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

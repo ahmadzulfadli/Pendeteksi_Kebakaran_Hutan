@@ -1,4 +1,5 @@
 from dbClass import *
+from SendMessage import SendMessage as send
 # read---------------------------------------------------------
 
 @app.route('/')
@@ -13,7 +14,6 @@ def index():
     lastThirtyDatas = Hutan.query.order_by(Hutan.timestamp.desc()).limit(20).all()
 
     countData = Hutan.query.count()
-
 
     # Fluktuasi data sensor
     if countData > 1:
@@ -102,18 +102,76 @@ def inputData():
             # algorithm for status
             status = "Aman" # aman
 
-            if temperature > 37 and humidity < 50 and moisture < 15 and rainfall < 1:
+            # if temperature > 37 and humidity < 50 and moisture < 15 and rainfall < 1:
+            #     status = "Potensi kebakaran level 1" # potensi kebakaran level 1
+            #     send.send_whatsapp_message("Potensi kebakaran level 1")
+
+            # if temperature > 40 and humidity < 50 and moisture < 10 and rainfall < 1:
+            #     status = "Potensi kebakaran level 2" # potensi kebakaran level 2
+            #     send.send_whatsapp_message("Potensi kebakaran level 2")
+
+            # if temperature > 43 and humidity < 50 and moisture < 5 and rainfall < 1:
+            #     status = "Potensi kebakaran level 3" # potensi kebakaran level 3
+            #     send.send_whatsapp_message("Potensi kebakaran level 3")
+            
+            # if co > 15:
+            #     status = "Kebakaran" # kebakaran
+            #     send.send_whatsapp_message("Kebakaran")
+
+            if temperature <= 41 and humidity <= 50 and moisture <= 2000 and rainfall <= 300:
                 status = "Potensi kebakaran level 1" # potensi kebakaran level 1
 
-            if temperature > 40 and humidity < 50 and moisture < 10 and rainfall < 1:
+            elif temperature <= 41 and humidity <= 50 and moisture <= 2000 and rainfall > 300:
                 status = "Potensi kebakaran level 2" # potensi kebakaran level 2
 
-            if temperature > 43 and humidity < 50 and moisture < 5 and rainfall < 1:
+            elif temperature <= 41 and humidity <=50 and moisture > 2000 and rainfall <=300:
                 status = "Potensi kebakaran level 3" # potensi kebakaran level 3
+
+            elif temperature <= 41 and humidity <=50 and moisture > 2000 and rainfall > 300:
+                status = "Potensi kebakaran level " # potensi kebakaran level
             
-            if co > 15:
+            elif temperature <= 41 and humidity > 50 and moisture <= 2000 and rainfall <= 300:
+                status = "Potensi kebakaran level 1" # potensi kebakaran level 1
+
+            elif temperature <= 41 and humidity > 50 and moisture <= 2000 and rainfall > 300:
+                status = "Potensi kebakaran level 2" # potensi kebakaran level 2
+
+            elif temperature <= 41 and humidity > 50 and moisture > 2000 and rainfall <= 300:
+                status = "Potensi kebakaran level 3" # potensi kebakaran level 3
+
+            elif temperature <= 41 and humidity > 50 and moisture > 2000 and rainfall > 300:
+                status = "Potensi kebakaran level " # potensi kebakaran level
+            
+            elif temperature > 41 and humidity <= 50 and moisture <= 2000 and rainfall <= 300:
+                status = "Potensi kebakaran level 1" # potensi kebakaran level 1
+
+            elif temperature > 41 and humidity <= 50 and moisture <= 2000 and rainfall > 300:
+                status = "Potensi kebakaran level 2" # potensi kebakaran level 2
+
+            elif temperature > 41 and humidity <= 50 and moisture > 2000 and rainfall <= 300:
+                status = "Potensi kebakaran level 3" # potensi kebakaran level 3
+
+            elif temperature > 41 and humidity <= 50 and moisture > 2000 and rainfall > 300:
+                status = "Potensi kebakaran level " # potensi kebakaran level
+
+            elif temperature > 41 and humidity > 50 and moisture <= 2000 and rainfall <= 300:
+                status = "Potensi kebakaran level " # potensi kebakaran level 
+
+            elif temperature > 41 and humidity > 50 and moisture <= 2000 and rainfall > 300:
+                status = "Potensi kebakaran level " # potensi kebakaran level 
+
+            elif temperature > 41 and humidity > 50 and moisture > 2000 and rainfall <= 300:
+                status = "Potensi kebakaran level " # potensi kebakaran level 
+
+            elif temperature > 41 and humidity > 50 and moisture > 2000 and rainfall > 300:
+                status = "Potensi kebakaran level " # potensi kebakaran leve
+            
+
+            if co > 100:
                 status = "Kebakaran" # kebakaran
 
+            if(status != "Aman"):
+                send.send_whatsapp_message(status)
 
             # upload data to database
             newSPDKHData = Hutan(
